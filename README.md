@@ -25,8 +25,10 @@ report performance-data from somewhere in your app (e.g. on request shutdown)
 ```php
 register_shutdown_function(function() {
     $requestStats = new RequestStatsEvent();
+    // data from your db class
     $requestStats->usedQueries = DB::$num_of_queries;
     $requestStats->usedConnections = DB::$num_of_connections;
+    // data from your runtime
     $requestStats->peakMemory = number_format(memory_get_peak_usage(true) / 1024 / 1024);
     
     // retrieve the monitor instance, e.g. via a DIC/a registry/singleton/whatever
@@ -44,6 +46,7 @@ register_exception_handler(function() {
     
     // retrieve the monitor instance, e.g. via a DIC/a registry/singleton/whatever
     // $monitor = .. 
+    $monitor->collectException($event);
 });
 ```
 
