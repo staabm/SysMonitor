@@ -1,0 +1,17 @@
+{
+    "name": "staabm/sysmonitor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus Staab",
+            "email": "markus.staab@redaxo.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.0",
+        "staabm/thincache": ">=0.6"
+    },
+    "autoload": {
+        "classmap": [ "src/" ]
+    }
+}
