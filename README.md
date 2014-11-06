@@ -1,0 +1,48 @@
+SysMonitor
+==========
+
+Monitors a php app and send notifications on certain error/exception/resource-exhausting/custom/etc. events.
+
+The monitor checks the data you provide and decides with a naive default implementation (see SystemMonitor#rateAndStore) when things get urgent.
+Notifications are beeing send in such cases, depending on your used Notifier.
+
+Usage
+=====
+
+init all the things
+
+```php
+// sends notificaitons on urgent events
+$notifier = new SeverityNotifier(new MyCustomNotifier(), SystemEvent::SEVERITY_URGENT);
+// main class which collects all the data
+$monitor = new SystemMonitor(new SystemEventStorage(), new MyRequestEnvImpl(), $notifier);
+```
+
+report performance-data from somewhere in your app (e.g. on request shutdown)
+
+```php
+register_shutdown_function(function() {
+    $requestStats = new RequestStatsEvent();
+    $requestStats->usedQueries = DB::$num_of_queries;
+    $requestStats->usedConnections = DB::$num_of_connections;
+    $requestStats->peakMemory = number_format(memory_get_peak_usage(true) / 1024 / 1024);
+    
+    // retrieve the monitor instance, e.g. via a DIC/a registry/singleton/whatever
+    // $monitor = .. 
+    $monitor->collectStats($requestStats);
+});
+```
+
+let the monitor collect data about exceptions occured
+
+```php
+register_exception_handler(function() {
+    $event = new RequestExceptionEvent();
+    $event->exception = $exception;
+    
+    // retrieve the monitor instance, e.g. via a DIC/a registry/singleton/whatever
+    // $monitor = .. 
+});
+```
+
+you could do the same for errors.
