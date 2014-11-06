@@ -6,6 +6,8 @@ Monitors a php app and send notifications on certain error/exception/resource-ex
 The monitor checks the data you provide and decides with a naive default implementation (see SystemMonitor#rateAndStore) when things get urgent.
 Notifications are beeing send in such cases, depending on your used Notifier.
 
+The default implementation of SystemEventStorage stores your data in a mix of APC and Memcached. Therefore it requires both php extensions.
+
 Usage
 =====
 
