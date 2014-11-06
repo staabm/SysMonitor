@@ -9,9 +9,7 @@
     ],
     "require": {
         "php": ">=5.2.0",
-        "staabm/thincache": ">=0.6",
-        "ext-apc": "*",
-        "ext-memcached": "*"
+        "staabm/thincache": ">=0.6"
     },
     "autoload": {
         "classmap": [ "src/" ]
