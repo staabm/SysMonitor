@@ -40,7 +40,7 @@ register_shutdown_function(function() {
 let the monitor collect data about exceptions occured
 
 ```php
-register_exception_handler(function() {
+set_exception_handler(function() {
     $event = new RequestExceptionEvent();
     $event->exception = $exception;
     
@@ -50,4 +50,4 @@ register_exception_handler(function() {
 });
 ```
 
-you could do the same for errors.
+you could do the same for errors. To collect data of fatal errors there are some known workarounds which can be used (checking for error_get_last() in a shutdown function)
