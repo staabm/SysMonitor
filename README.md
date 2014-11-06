@@ -11,7 +11,7 @@ The default implementation of SystemEventStorage stores your data in a mix of AP
 Usage
 =====
 
-init all the things
+init all the things. All classes prefixed with `My` need to be provided by the application/framework beeing monitored.
 
 ```php
 // sends notificaitons on urgent events
