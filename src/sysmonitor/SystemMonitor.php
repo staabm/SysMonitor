@@ -3,7 +3,6 @@
 namespace staabm\sysmonitor;
 
 use staabm\sysmonitor\events\RequestStatsEvent;
-use staabm\sysmonitor\events\RequestErrorEvent;
 use staabm\sysmonitor\events\RequestExceptionEvent;
 
 class SystemMonitor
@@ -56,14 +55,6 @@ class SystemMonitor
         }
     }
 
-    public function collectError(RequestErrorEvent $evt)
-    {
-        $sysEvt = $this->createSystemEvent($evt);
-
-        $this->rateAndStore($sysEvt);
-        $this->notifier->notifiy($sysEvt);
-    }
-
     public function collectException(RequestExceptionEvent $evt)
     {
         $sysEvt = $this->createSystemEvent($evt);
@@ -90,7 +81,7 @@ class SystemMonitor
         $count = $this->storage->count($sysEvt);
 
         // uplift severity..
-        if ($count >= 10 && ($evt instanceof RequestErrorEvent || $evt instanceof RequestExceptionEvent)) {
+        if ($count >= 10 && $evt instanceof RequestExceptionEvent) {
             // .. based on frequency of the same failure
             $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
         } elseif ($count >= 20 && $evt instanceof RequestStatsEvent) {
@@ -150,9 +141,6 @@ class SystemMonitor
         if ($evt instanceof RequestStatsEvent) {
             $title = 'Resource Report: (con# ' . $evt->usedConnections . ', qry# ' . $evt->usedQueries . ')';
             $hash = md5($this->env->getResourceName());
-        } elseif ($evt instanceof RequestErrorEvent) {
-            $title = sprintf('Error "%s" in %s:%s', $evt->message, $evt->file, $evt->line);
-            $hash = md5($title);
         } elseif ($evt instanceof RequestExceptionEvent) {
             $exc = $evt->exception;
             $title = sprintf('Exception: "%s" in %s:%s', $exc->getMessage(), $exc->getFile(), $exc->getLine());

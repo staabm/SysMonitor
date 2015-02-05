@@ -3,6 +3,7 @@
 namespace staabm\sysmonitor;
 
 use \Exception;
+use staabm\sysmonitor\events\RequestExceptionEvent;
 
 class SystemEventStorage
 {
@@ -34,6 +35,11 @@ class SystemEventStorage
     {
         if (empty($evt->hash)) {
             throw new Exception("Hash is not expected to be empty!");
+        }
+
+        if ($evt->origin instanceof RequestExceptionEvent) {
+            // wrap exception to prevent endless-recursion caused by args in stacktraces
+            $evt->origin->exception = SerializableException::fromException($evt->origin->exception);
         }
 
         $events = $this->findByHash($evt->hash);
