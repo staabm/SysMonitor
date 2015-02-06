@@ -37,12 +37,15 @@ class SystemEventStorage
             throw new Exception("Hash is not expected to be empty!");
         }
 
-        if ($evt->origin instanceof RequestExceptionEvent) {
+        // work on a defensive copy, so we won't influence the given arg
+        $evt2Store = clone $evt;
+
+        if ($evt2Store->origin instanceof RequestExceptionEvent) {
             // wrap exception to prevent endless-recursion caused by args in stacktraces
-            $evt->origin->exception = SerializableException::fromException($evt->origin->exception);
+            $evt2Store->origin->exception = SerializableException::fromException($evt2Store->origin->exception);
         }
 
-        $events = $this->findByHash($evt->hash);
+        $events = $this->findByHash($evt2Store->hash);
 
         // make sure we only hold at most X event-occurences, but keep the oldest
         $maxOccurences = 5;
@@ -51,13 +54,13 @@ class SystemEventStorage
             $events = array_slice($events, -($maxOccurences-1));
             $events[0] = $oldest;
         }
-        $events[] = $evt;
+        $events[] = $evt2Store;
 
         // events which don't happen at least once per X hours, will be dropped
-        $this->dataStore->set(self::CACHE_NAMESPACE . $evt->hash, $events, strtotime("+2 hours"));
+        $this->dataStore->set(self::CACHE_NAMESPACE . $evt2Store->hash, $events, strtotime("+2 hours"));
         // we remember how often an error occured a bit longer than the actual even-data
         // because this info might help us later on to decide which events are more important than others.
-        return $this->dataStatistics->increment(self::CACHE_NAMESPACE . $evt->hash, 1, strtotime("+3 hours"));
+        return $this->dataStatistics->increment(self::CACHE_NAMESPACE . $evt2Store->hash, 1, strtotime("+3 hours"));
     }
 
     /**

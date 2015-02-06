@@ -6,35 +6,63 @@ class SerializableException {
     /**
      * @var string
      */
-    public $message;
+    private $originClass;
 
     /**
      * @var string
      */
-    public $code;
+    private $message;
 
     /**
      * @var string
      */
-    public $file;
+    private $code;
 
     /**
      * @var string
      */
-    public $line;
+    private $file;
 
     /**
      * @var string
      */
-    public $trace;
+    private $line;
+
+    /**
+     * @var string
+     */
+    private $trace;
 
     /**
      * @var SerializedException
      */
-    public $previous;
+    private $previous;
+
+    public function getMessage() {
+        return $this->message;
+    }
+    public function getCode() {
+        return $this->code;
+    }
+    public function getFile() {
+        return $this->file;
+    }
+    public function getLine() {
+        return $this->line;
+    }
+    public function getTraceAsString() {
+        return $this->trace;
+    }
+    public function getPrevious() {
+        return $this->previous;
+    }
+    public function getOriginClass() {
+        return $this->originClass;
+    }
 
     public static function fromException(\Exception $e) {
         $ex = new SerializableException();
+        $ex->originClass = get_class($e);
         $ex->message = $e->getMessage();
         $ex->code = $e->getCode();
         $ex->file = $e->getFile();
