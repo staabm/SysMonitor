@@ -1,7 +1,7 @@
 SysMonitor
 ==========
 
-Monitors a php app and send notifications on certain error/exception/resource-exhausting/custom/etc. events.
+Monitors a php app and sends notifications on certain error/exception/resource-exhausting/custom/etc. events.
 
 The monitor checks the data you provide and decides with a naive default implementation (see SystemMonitor#rateAndStore) when things get urgent/severe. SystemEvents are compared using a hash so times of occurence can also be based on similarity.
 Notifications are beeing send in such cases, depending on your used Notifier.
