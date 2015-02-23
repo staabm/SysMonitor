@@ -58,9 +58,14 @@ class SystemEventStorage
 
         // events which don't happen at least once per X hours, will be dropped
         $this->dataStore->set(self::CACHE_NAMESPACE . $evt2Store->hash, $events, strtotime("+2 hours"));
-        // we remember how often an error occured a bit longer than the actual even-data
-        // because this info might help us later on to decide which events are more important than others.
-        return $this->dataStatistics->increment(self::CACHE_NAMESPACE . $evt2Store->hash, 1, strtotime("+3 hours"));
+
+        if ($this->dataStatistics->supported()) {
+            // we remember how often an error occured a bit longer than the actual even-data
+            // because this info might help us later on to decide which events are more important than others.
+            return $this->dataStatistics->increment(self::CACHE_NAMESPACE . $evt2Store->hash, 1, strtotime("+3 hours"));
+        }
+        // when APC is not supported, return approx. value
+        return count($events);
     }
 
     /**
@@ -77,7 +82,11 @@ class SystemEventStorage
             throw new Exception("Hash is not expected to be empty!");
         }
 
-        return $this->dataStatistics->get(self::CACHE_NAMESPACE . $evt->hash, 0);
+        if ($this->dataStatistics->supported()) {
+            return $this->dataStatistics->get(self::CACHE_NAMESPACE . $evt->hash, 0);
+        }
+        // when APC is not supported, return approx. value
+        return count($this->findByHash($evt->hash));
     }
 
     /**
