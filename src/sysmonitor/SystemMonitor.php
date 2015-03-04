@@ -9,19 +9,16 @@ class SystemMonitor
 {
 
     /**
-     *
      * @var SystemEventStorage
      */
     private $storage;
 
     /**
-     *
      * @var RequestEnvironment
      */
     public $env;
 
     /**
-     *
      * @var EmailNotifier
      */
     public $notifier;
@@ -32,7 +29,7 @@ class SystemMonitor
         $this->env = $env;
         $this->notifier = $notifier;
 
-        if (! defined('RESOURCE_NOTIFICATION')) {
+        if (!defined('RESOURCE_NOTIFICATION')) {
             define('RESOURCE_NOTIFICATION', true);
         }
     }
