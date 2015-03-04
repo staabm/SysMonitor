@@ -29,6 +29,15 @@ class SystemMonitor
         $this->env = $env;
         $this->notifier = $notifier;
 
+        if (!defined('MONITOR_DBCON_THRESHOLD')) {
+            define('MONITOR_DBCON_THRESHOLD', 2);
+        }
+        if (!defined('MONITOR_DBQUERY_THRESHOLD')) {
+            define('MONITOR_DBQUERY_THRESHOLD', 500);
+        }
+        if (!defined('MONITOR_MEMORY_THRESHOLD')) {
+            define('MONITOR_MEMORY_THRESHOLD', 512);
+        }
         if (!defined('RESOURCE_NOTIFICATION')) {
             define('RESOURCE_NOTIFICATION', true);
         }
@@ -111,11 +120,11 @@ class SystemMonitor
         if ($evt instanceof RequestStatsEvent) {
             // uplift the severity in case our page required..
             // ...more than X queries
-            $maxQueries = 500;
+            $maxQueries = MONITOR_DBQUERY_THRESHOLD;
             // ...more than Y db connections
-            $maxConnections = 2;
+            $maxConnections = MONITOR_DBCON_THRESHOLD;
             // ..more than Z MB per request
-            $maxMemory = 512;
+            $maxMemory = MONITOR_MEMORY_THRESHOLD;
 
             if ($evt->usedQueries > $maxQueries) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
