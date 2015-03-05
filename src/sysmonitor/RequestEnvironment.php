@@ -19,7 +19,7 @@ interface RequestEnvironment {
     public function getResourceName();
 
     /**
-     * Returns the name of the host
+     * Returns the name of the host to identify the actual server node where this request was handled.
      *
      * @return string
      */
