@@ -51,3 +51,9 @@ set_exception_handler(function() {
 ```
 
 you could do the same for errors. To collect data of fatal errors there are some known workarounds which can be used (checking for error_get_last() in a shutdown function)
+
+
+Sidenote
+========
+
+This library was extracted out of a framework and contains some "strange" things which are kept for BC reasons.
