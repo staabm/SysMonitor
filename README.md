@@ -57,3 +57,4 @@ Sidenote
 ========
 
 This library was extracted out of a framework and contains some "strange" things which are kept for BC reasons.
+This will be changed in version 2.0.
