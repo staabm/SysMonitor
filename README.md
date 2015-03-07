@@ -3,10 +3,10 @@ SysMonitor
 
 Monitors a php app and sends notifications on certain error/exception/resource-exhausting/custom/etc. events.
 
-The monitor checks the data you provide and decides with a naive default implementation (see SystemMonitor#rateAndStore) when things get urgent/severe. SystemEvents are compared using a hash so times of occurence can also be based on similarity.
+The monitor checks the data you provide and decides with a naive default implementation (see `SystemMonitor#rateAndStore`) when things get urgent/severe. `SystemEvent`s are compared using a hash so times of occurence can also be based on similarity.
 Notifications are beeing send in such cases, depending on your used Notifier.
 
-The default implementation of SystemEventStorage stores your data in a mix of APC and Memcached. Therefore it requires both php extensions.
+The default implementation of `SystemEventStorage` stores your data in a mix of APC and Memcached. Therefore it requires both php extensions.
 
 Usage
 =====
@@ -37,7 +37,7 @@ register_shutdown_function(function() {
 });
 ```
 
-let the monitor collect data about exceptions occured
+let the `Monitor` collect data about exceptions occured
 
 ```php
 set_exception_handler(function() {
@@ -50,7 +50,7 @@ set_exception_handler(function() {
 });
 ```
 
-you could do the same for errors. To collect data of fatal errors there are some known workarounds which can be used (checking for error_get_last() in a shutdown function)
+you could do the same for errors. To collect data of fatal errors there are some known workarounds which can be used (checking for `error_get_last()` in a shutdown function)
 
 
 Sidenote
