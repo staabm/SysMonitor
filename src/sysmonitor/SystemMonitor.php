@@ -112,7 +112,7 @@ class SystemMonitor
                 if ($this->isFatalError($exc->getCode())) {
                     $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
                 }
-            } elseif ($exc instanceof SeverException) {
+            } elseif ($exc instanceof SevereException) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
             }
         }
