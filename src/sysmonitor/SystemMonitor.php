@@ -38,6 +38,9 @@ class SystemMonitor
         if (!defined('MONITOR_MEMORY_THRESHOLD')) {
             define('MONITOR_MEMORY_THRESHOLD', 512);
         }
+        if (!defined('MONITOR_REQUESTTIME_THRESHOLD')) {
+            define('MONITOR_REQUESTTIME_THRESHOLD', 5);
+        }
         if (!defined('RESOURCE_NOTIFICATION')) {
             define('RESOURCE_NOTIFICATION', true);
         }
@@ -48,8 +51,9 @@ class SystemMonitor
         // we won't even collect data for requests which don't hit either of these min-values, to prevent unnecessary garbage.
         $minQueries = 130;
         $minMemory = 80;
+        $minTime = 3;
 
-        if ($evt->usedQueries < $minQueries && $evt->peakMemory < $minMemory) {
+        if ($evt->usedQueries < $minQueries && $evt->peakMemory < $minMemory && $evt->requestTime < $minTime) {
             return;
         }
 
@@ -125,6 +129,8 @@ class SystemMonitor
             $maxConnections = MONITOR_DBCON_THRESHOLD;
             // ..more than Z MB per request
             $maxMemory = MONITOR_MEMORY_THRESHOLD;
+            // ..more than W sec request time
+            $maxRequestTime = MONITOR_REQUESTTIME_THRESHOLD;
 
             if ($evt->usedQueries > $maxQueries) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
@@ -132,6 +138,9 @@ class SystemMonitor
             } elseif ($evt->usedConnections > $maxConnections) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
                 $sysEvt->title = 'Page required ' . $evt->usedConnections . ' mysql connections to render!';
+            } elseif ($evt->requestTime > $maxRequestTime) {
+                $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
+                $sysEvt->title = 'Page required ' . $evt->requestTime . ' seconds to render!';
             } else {
                 $memPeak = $evt->peakMemory;
                 if ($memPeak > $maxMemory) {
@@ -187,5 +196,4 @@ class SystemMonitor
             )
         );
     }
-
 }

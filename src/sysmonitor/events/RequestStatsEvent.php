@@ -17,4 +17,9 @@ class RequestStatsEvent extends AbstractEvent {
      * @var float
      */
     public $peakMemory;
+
+    /**
+     * @var float
+     */
+    public $requestTime;
 }
