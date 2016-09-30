@@ -94,6 +94,9 @@ class SystemMonitor
         if ($count >= 10 && $evt instanceof RequestExceptionEvent) {
             // .. based on frequency of the same failure
             $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
+        } elseif ($count >= 10 && $evt instanceof RequestStatsEvent && $evt->requestTime > 3) {
+            // .. based on frequency of the same exhausted resource and request time
+            $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
         } elseif ($count >= 20 && $evt instanceof RequestStatsEvent) {
             // .. based on frequency of the same exhausted resource
             $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
