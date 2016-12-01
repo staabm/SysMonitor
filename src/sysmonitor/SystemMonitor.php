@@ -134,18 +134,18 @@ class SystemMonitor
 
             if ($evt->usedQueries > $maxQueries) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
-                $sysEvt->title = 'Page required ' . $evt->usedQueries . ' sql queries to render!';
+                $sysEvt->title = 'Resource required ' . $evt->usedQueries . ' sql queries to execute!';
             } elseif ($evt->usedConnections > $maxConnections) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
-                $sysEvt->title = 'Page required ' . $evt->usedConnections . ' mysql connections to render!';
+                $sysEvt->title = 'Resource required ' . $evt->usedConnections . ' mysql connections to execute!';
             } elseif ($evt->requestTime > $maxRequestTime) {
                 $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
-                $sysEvt->title = 'Page required ' . $evt->requestTime . ' seconds to render!';
+                $sysEvt->title = 'Resource required ' . $evt->requestTime . ' seconds to execute!';
             } else {
                 $memPeak = $evt->peakMemory;
                 if ($memPeak > $maxMemory) {
                     $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
-                    $sysEvt->title = 'Page required ' . $memPeak . ' MB memory to render!';
+                    $sysEvt->title = 'Resource required ' . $memPeak . ' MB memory to execute!';
                 }
             }
         }
