@@ -60,7 +60,11 @@ class SerializableException {
         return $this->originClass;
     }
 
-    public static function fromException(\Exception $e) {
+    /**
+     * @param \Exception|\Throwable $e
+     * @return $this
+     */
+    public static function fromException($e) {
         $ex = new SerializableException();
         $ex->originClass = get_class($e);
         $ex->message = $e->getMessage();
