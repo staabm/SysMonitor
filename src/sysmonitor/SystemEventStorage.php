@@ -22,7 +22,7 @@ class SystemEventStorage
     public function __construct()
     {
         $this->dataStore = \CacheMemcached::factory();
-        $this->dataStatistics = new \CacheApc();
+        $this->dataStatistics = new \CacheInApc();
     }
 
     /**
