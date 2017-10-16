@@ -10,6 +10,7 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+.php_cs.cache
 
 # Thumbnails
 ._*
