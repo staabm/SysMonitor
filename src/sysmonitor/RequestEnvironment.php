@@ -2,7 +2,8 @@
 
 namespace staabm\sysmonitor;
 
-interface RequestEnvironment {
+interface RequestEnvironment
+{
     /**
      * Returns all request information
      *

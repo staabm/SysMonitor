@@ -81,7 +81,8 @@ class SystemMonitor
      *
      * @return boolean Returns true when a notification should be send, otherwise false.
      */
-    protected function notifyException(RequestExceptionEvent $evt) {
+    protected function notifyException(RequestExceptionEvent $evt)
+    {
         return !($evt->exception instanceof UnreportedException);
     }
 
@@ -176,13 +177,13 @@ class SystemMonitor
     }
 
     private function expectsSoap()
-	{
-	    // depending on the used framework, there are different was to check for soap requests
-	    return !empty($_SERVER['HTTP_SOAPACTION']) ||
-	           !empty($_SERVER['HTTP_ACCEPT']) && stripos($_SERVER['HTTP_ACCEPT'], 'application/soap+xml') !== false;
-	}
+    {
+        // depending on the used framework, there are different was to check for soap requests
+        return !empty($_SERVER['HTTP_SOAPACTION']) ||
+               !empty($_SERVER['HTTP_ACCEPT']) && stripos($_SERVER['HTTP_ACCEPT'], 'application/soap+xml') !== false;
+    }
 
-	private function isFatalError($errno)
+    private function isFatalError($errno)
     {
         return in_array(
             $errno,

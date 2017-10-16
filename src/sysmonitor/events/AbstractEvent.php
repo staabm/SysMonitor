@@ -3,6 +3,6 @@
 namespace staabm\sysmonitor\events;
 
 // placeholder class for
-abstract class AbstractEvent {
-
+abstract class AbstractEvent
+{
 }

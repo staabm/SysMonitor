@@ -2,7 +2,8 @@
 
 namespace staabm\sysmonitor;
 
-class SerializableException {
+class SerializableException
+{
     /**
      * @var string
      */
@@ -38,25 +39,32 @@ class SerializableException {
      */
     private $previous;
 
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
-    public function getLine() {
+    public function getLine()
+    {
         return $this->line;
     }
-    public function getTraceAsString() {
+    public function getTraceAsString()
+    {
         return $this->trace;
     }
-    public function getPrevious() {
+    public function getPrevious()
+    {
         return $this->previous;
     }
-    public function getOriginClass() {
+    public function getOriginClass()
+    {
         return $this->originClass;
     }
 
@@ -64,7 +72,8 @@ class SerializableException {
      * @param \Exception|\Throwable $e
      * @return $this
      */
-    public static function fromException($e) {
+    public static function fromException($e)
+    {
         $ex = new SerializableException();
         $ex->originClass = get_class($e);
         $ex->message = $e->getMessage();

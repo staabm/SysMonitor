@@ -2,7 +2,8 @@
 
 namespace staabm\sysmonitor\events;
 
-class RequestStatsEvent extends AbstractEvent {
+class RequestStatsEvent extends AbstractEvent
+{
     /**
      * @var int
      */
