@@ -10,12 +10,12 @@ class SystemEventStorage
     const CACHE_NAMESPACE = 'rocket/sysmonitor/events/';
 
     /**
-     * @var CacheInterface
+     * @var \CacheInterface
      */
     private $dataStore;
 
     /**
-     * @var CacheApc
+     * @var \CacheInApc
      */
     protected $dataStatistics;
 
