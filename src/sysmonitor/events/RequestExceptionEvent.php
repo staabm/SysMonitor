@@ -5,7 +5,7 @@ namespace staabm\sysmonitor\events;
 class RequestExceptionEvent extends AbstractEvent
 {
     /**
-     * @var Exception
+     * @var \Exception
      */
     public $exception;
 }
