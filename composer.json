@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": ">=5.2.0",
-        "staabm/thincache": ">=0.8"
+        "staabm/thincache": "^0.9"
     },
     "autoload": {
         "classmap": [ "src/" ]
