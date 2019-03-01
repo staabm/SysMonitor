@@ -22,7 +22,13 @@ class SystemEventStorage
     public function __construct()
     {
         $this->dataStore = \CacheMemcached::factory();
-        $this->dataStatistics = new \CacheInApc();
+        // only memcache"d" supports the increment-operation, therefore don't use the factory here!
+        $memcached = new \CacheMemcached();
+        if ($memcached->supported()) {
+            $this->dataStatistics = $memcached;
+        } else {
+            $this->dataStatistics = new \CacheInApc();
+        }
     }
 
     /**
