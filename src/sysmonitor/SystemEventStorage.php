@@ -8,6 +8,7 @@ use staabm\sysmonitor\events\RequestExceptionEvent;
 class SystemEventStorage
 {
     const CACHE_NAMESPACE = 'rocket/sysmonitor/events/';
+    const STATS_NAMESPACE = 'rocket/sysmonitor/stats/';
 
     /**
      * @var \CacheInterface
@@ -68,7 +69,7 @@ class SystemEventStorage
         if ($this->dataStatistics->supported()) {
             // we remember how often an error occured a bit longer than the actual even-data
             // because this info might help us later on to decide which events are more important than others.
-            return $this->dataStatistics->increment(self::CACHE_NAMESPACE . $evt2Store->hash, 1, strtotime("+3 hours"));
+            return $this->dataStatistics->increment(self::STATS_NAMESPACE . $evt2Store->hash, 1, strtotime("+3 hours"));
         }
         // when APC is not supported, return approx. value
         return count($events);
@@ -89,7 +90,7 @@ class SystemEventStorage
         }
 
         if ($this->dataStatistics->supported()) {
-            return $this->dataStatistics->get(self::CACHE_NAMESPACE . $evt->hash, 0);
+            return $this->dataStatistics->get(self::STATS_NAMESPACE . $evt->hash, 0);
         }
         // when APC is not supported, return approx. value
         return count($this->findByHash($evt->hash));
