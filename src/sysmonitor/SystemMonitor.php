@@ -51,7 +51,7 @@ class SystemMonitor
         // we won't even collect data for requests which don't hit either of these min-values, to prevent unnecessary garbage.
         $minQueries = 130;
         $minMemory = 80;
-        $minTime = 3;
+        $minTime = php_sapi_name() == 'cli' ? 10 : 3;
 
         if ($evt->usedQueries < $minQueries && $evt->peakMemory < $minMemory && $evt->requestTime < $minTime) {
             return;
