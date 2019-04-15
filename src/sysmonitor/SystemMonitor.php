@@ -19,7 +19,7 @@ class SystemMonitor
     public $env;
 
     /**
-     * @var EmailNotifier
+     * @var Notifier
      */
     public $notifier;
 
