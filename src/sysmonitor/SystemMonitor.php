@@ -102,7 +102,7 @@ class SystemMonitor
             // .. for cron-jobs
             $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
 
-            // side note: APC is not available in CLI per default,
+        // side note: APC is not available in CLI per default,
             // therefore sending it directly is a must do.
             // -> $count will not be accurate in CLI and cannot be relied on.
         } elseif ($this->expectsSoap()) {
