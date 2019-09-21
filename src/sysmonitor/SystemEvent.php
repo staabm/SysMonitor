@@ -25,7 +25,7 @@ class SystemEvent
     /**
      * Unixtimestamp, when this event occured
      *
-     * @var string
+     * @var int
      */
     public $time;
 
