@@ -77,7 +77,7 @@ class SystemMonitor
     }
 
     /**
-     * @param RequestExceptionEvent $exception
+     * @param RequestExceptionEvent $evt
      *
      * @return boolean Returns true when a notification should be send, otherwise false.
      */

@@ -2,6 +2,8 @@
 
 namespace staabm\sysmonitor;
 
+use staabm\sysmonitor\events\AbstractEvent;
+
 class SystemEvent
 {
     // the bigger the value of the severity, the more important is it
