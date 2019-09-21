@@ -14,7 +14,7 @@ jobs:
       with:
         args: analyse -c phpstan.neon.dist
 
-bc-check:
+  bc-check:
     name: Backward Compatibility Check
     runs-on: ubuntu-latest
     steps:
