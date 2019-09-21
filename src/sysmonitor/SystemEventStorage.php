@@ -16,7 +16,7 @@ class SystemEventStorage
     private $dataStore;
 
     /**
-     * @var \CacheInApc
+     * @var \CacheInApc|\CacheMemcached
      */
     protected $dataStatistics;
 

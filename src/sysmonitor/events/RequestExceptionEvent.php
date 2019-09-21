@@ -2,10 +2,12 @@
 
 namespace staabm\sysmonitor\events;
 
+use staabm\sysmonitor\SerializableException;
+
 class RequestExceptionEvent extends AbstractEvent
 {
     /**
-     * @var \Exception
+     * @var \Exception|SerializableException
      */
     public $exception;
 }
