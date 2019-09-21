@@ -13,3 +13,13 @@ jobs:
       uses: docker://oskarstark/phpstan-ga
       with:
         args: analyse -c phpstan.neon.dist
+
+bc-check:
+    name: Backward Compatibility Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Backward Compatibility Check
+      uses: docker://nyholm/roave-bc-check-ga
+      with:
+        args: --from=v0.6
