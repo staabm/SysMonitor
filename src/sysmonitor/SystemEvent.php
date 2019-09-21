@@ -18,7 +18,7 @@ class SystemEvent
     /**
      * One of the SystemEvent::SEVERITY_* constants
      *
-     * @var string
+     * @var int
      */
     public $severity;
 
