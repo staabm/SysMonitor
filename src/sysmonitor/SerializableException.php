@@ -35,7 +35,7 @@ class SerializableException
     private $trace;
 
     /**
-     * @var SerializedException
+     * @var SerializableException
      */
     private $previous;
 
