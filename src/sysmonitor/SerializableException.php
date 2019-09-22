@@ -25,7 +25,7 @@ class SerializableException
     private $file;
 
     /**
-     * @var string
+     * @var int
      */
     private $line;
 
@@ -35,7 +35,7 @@ class SerializableException
     private $trace;
 
     /**
-     * @var SerializedException
+     * @var self
      */
     private $previous;
 
@@ -70,7 +70,7 @@ class SerializableException
 
     /**
      * @param \Exception|\Throwable $e
-     * @return $this
+     * @return self
      */
     public static function fromException($e)
     {

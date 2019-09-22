@@ -1,0 +1,35 @@
+name: PHP Checks
+
+on: [push]
+
+jobs:
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: PHPStan
+      uses: docker://oskarstark/phpstan-ga
+      with:
+        args: analyse -c phpstan.neon.dist
+
+  bc-check:
+    name: Backward Compatibility Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Backward Compatibility Check
+      uses: docker://nyholm/roave-bc-check-ga
+      with:
+        args: --from=v0.6
+
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: PHP-CS-Fixer
+      uses: docker://oskarstark/php-cs-fixer-ga
+      with:
+        args: --diff --dry-run

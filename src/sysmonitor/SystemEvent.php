@@ -2,6 +2,8 @@
 
 namespace staabm\sysmonitor;
 
+use staabm\sysmonitor\events\AbstractEvent;
+
 class SystemEvent
 {
     // the bigger the value of the severity, the more important is it
@@ -16,14 +18,14 @@ class SystemEvent
     /**
      * One of the SystemEvent::SEVERITY_* constants
      *
-     * @var string
+     * @var int
      */
     public $severity;
 
     /**
      * Unixtimestamp, when this event occured
      *
-     * @var string
+     * @var int
      */
     public $time;
 
