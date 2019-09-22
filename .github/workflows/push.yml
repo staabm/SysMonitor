@@ -43,4 +43,4 @@ jobs:
       uses: nanasess/setup-php@v2
       with:
         php-version: '7.1'
-      run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
+    - run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
