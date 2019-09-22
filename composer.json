@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "php": ">=5.2.0",
+        "php": "^7.0",
         "staabm/thincache": "^0.9"
     },
     "autoload": {
