@@ -22,7 +22,7 @@ jobs:
     - name: Backward Compatibility Check
       uses: docker://nyholm/roave-bc-check-ga
       with:
-        args: --from=v0.6
+        args: --from=v0.7
 
   php-cs-fixer:
     name: PHP-CS-Fixer
