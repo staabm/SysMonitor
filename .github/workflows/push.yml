@@ -42,5 +42,5 @@ jobs:
     - name: REX Linting
       uses: shivammathur/setup-php@master
       with:
-        php-version: 7.3
+        php-version: 7.1
     - run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
