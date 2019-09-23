@@ -40,7 +40,5 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: REX Linting
-      uses: nanasess/setup-php@master
-      with:
-        php-version: '7.1'
-    - run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
+      uses: franzliedke/gh-action-php@master
+    - run: php7.1 composer require --dev friendsofredaxo/linter && php7.1 vendor/bin/rexlint
