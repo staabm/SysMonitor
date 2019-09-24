@@ -44,3 +44,4 @@ jobs:
       with:
         php-version: 7.1
     - run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
+    - run: composer require --dev phpstan/phpstan-shim && vendor/bin/phpstan analyse
