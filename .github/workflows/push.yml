@@ -45,4 +45,4 @@ jobs:
         php-version: 7.1
     - run: composer require --dev friendsofredaxo/linter && vendor/bin/rexlint
     - run: composer require --dev phpstan/phpstan-shim && vendor/bin/phpstan analyse
-    - run: composer require --dev friendsofphp/php-cs-fixer && php-cs-fixer fix --dry-run --diff --verbose
+    - run: composer require --dev friendsofphp/php-cs-fixer && vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
