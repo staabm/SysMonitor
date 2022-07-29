@@ -7,7 +7,7 @@ use staabm\sysmonitor\SerializableException;
 class RequestExceptionEvent extends AbstractEvent
 {
     /**
-     * @var \Error|\Exception|SerializableException
+     * @var \Error|\Exception|\Throwable|SerializableException
      */
     public $exception;
 }
