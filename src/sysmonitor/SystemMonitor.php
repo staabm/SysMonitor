@@ -179,6 +179,7 @@ class SystemMonitor
             $title = sprintf('Exception: "%s" in %s:%s', $exc->getMessage(), $exc->getFile(), $exc->getLine());
             $hash = md5($title);
         } else {
+            // @phptan-ignore-next-line
             throw new \Exception(sprintf('Unsupported event type "%s"', is_object($evt) ? get_class($evt) : gettype($evt)));
         }
 
