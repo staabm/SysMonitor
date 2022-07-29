@@ -39,37 +39,64 @@ class SerializableException
      */
     private $previous;
 
+    /**
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;
     }
+
+    /**
+     * @return string
+     */
     public function getCode()
     {
         return $this->code;
     }
+
+    /**
+     * @return string
+     */
     public function getFile()
     {
         return $this->file;
     }
+
+    /**
+     * @return int
+     */
     public function getLine()
     {
         return $this->line;
     }
+
+    /**
+     * @return string
+     */
     public function getTraceAsString()
     {
         return $this->trace;
     }
+
+    /**
+     * @return SerializableException
+     */
     public function getPrevious()
     {
         return $this->previous;
     }
+
+    /**
+     * @return string
+     */
     public function getOriginClass()
     {
         return $this->originClass;
     }
 
     /**
-     * @param \Exception|\Throwable $e
+     * @param \Exception|\Throwable|self $e
      * @return self
      */
     public static function fromException($e)
