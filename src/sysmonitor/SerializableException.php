@@ -96,7 +96,7 @@ class SerializableException
     }
 
     /**
-     * @param \Exception|\Throwable $e
+     * @param \Exception|\Throwable|self $e
      * @return self
      */
     public static function fromException($e)
