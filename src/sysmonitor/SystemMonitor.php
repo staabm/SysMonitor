@@ -46,6 +46,9 @@ class SystemMonitor
         }
     }
 
+    /**
+     * @return void
+     */
     public function collectStats(RequestStatsEvent $evt)
     {
         // we won't even collect data for requests which don't hit either of these min-values, to prevent unnecessary garbage.
@@ -65,6 +68,9 @@ class SystemMonitor
         }
     }
 
+    /**
+     * @return void
+     */
     public function collectException(RequestExceptionEvent $evt)
     {
         $sysEvt = $this->createSystemEvent($evt);
@@ -86,6 +92,9 @@ class SystemMonitor
         return !($evt->exception instanceof UnreportedException);
     }
 
+    /**
+     * @return void
+     */
     private function rateAndStore(SystemEvent $sysEvt)
     {
         $evt = $sysEvt->origin;
@@ -156,6 +165,10 @@ class SystemMonitor
         $this->storage->store($sysEvt);
     }
 
+    /**
+     * @param RequestStatsEvent|RequestExceptionEvent $evt
+     * @return SystemEvent
+     */
     private function createSystemEvent($evt)
     {
         if ($evt instanceof RequestStatsEvent) {
@@ -178,6 +191,9 @@ class SystemMonitor
         return $sysEvt;
     }
 
+    /**
+     * @return bool
+     */
     private function expectsSoap()
     {
         // depending on the used framework, there are different was to check for soap requests
@@ -185,6 +201,10 @@ class SystemMonitor
                !empty($_SERVER['HTTP_ACCEPT']) && stripos($_SERVER['HTTP_ACCEPT'], 'application/soap+xml') !== false;
     }
 
+    /**
+     * @param int $errno
+     * @return bool
+     */
     private function isFatalError($errno)
     {
         return in_array(

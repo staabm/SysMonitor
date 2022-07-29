@@ -16,6 +16,9 @@ class SeverityNotifier implements Notifier
      */
     private $wrapped;
 
+    /**
+     * @param int $minSeverity
+     */
     public function __construct(Notifier $wrappedNotifier, $minSeverity)
     {
         $this->minSeverity = $minSeverity;
