@@ -5,7 +5,7 @@ namespace staabm\sysmonitor;
 class SerializableException
 {
     /**
-     * @var string
+     * @var class-string
      */
     private $originClass;
 
@@ -88,7 +88,7 @@ class SerializableException
     }
 
     /**
-     * @return string
+     * @return class-string
      */
     public function getOriginClass()
     {
