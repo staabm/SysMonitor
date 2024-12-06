@@ -8,6 +8,8 @@ interface Notifier
      *
      * @param SystemEvent $e
      * @return bool returns true on success or false when no message was sent (not only a error case)
+     *
+     * @api
      */
     public function notifiy(SystemEvent $e);
 }
