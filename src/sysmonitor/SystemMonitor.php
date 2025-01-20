@@ -101,7 +101,7 @@ class SystemMonitor
         $count = $this->storage->count($sysEvt);
 
         // uplift severity..
-        if ($count === 0) {
+        if ($count === 0 && $evt instanceof RequestExceptionEvent) {
             // report the first occurence immediately, but don't report every single error
             $sysEvt->severity = SystemEvent::SEVERITY_URGENT;
         } elseif ($count >= 10 && $evt instanceof RequestExceptionEvent) {
